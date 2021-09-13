@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">random_gif</string>
+    <string name="error_message">ошибка</string>
+    <string name="loading">загрузка</string>
+    <string name="button_prev_text">назад</string>
+    <string name="button_next_text">вперед</string>
+    <string name="button_clear">очистить</string>
+</resources>
