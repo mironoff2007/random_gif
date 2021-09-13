@@ -88,7 +88,9 @@ class MainActivity : AppCompatActivity() {
                     buttonPrev.isEnabled = true
                     buttonPrev.background = baseContext.getDrawable(R.drawable.button_background)
                 }
-                Status.LOADING -> textView.text = getString(R.string.loading)
+                Status.LOADING -> {
+                    textView.text = getString(R.string.loading)
+                }
                 Status.ERROR -> {
                     textView.text = getString(R.string.error_message)
                     //Show error placeholder

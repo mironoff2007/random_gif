@@ -10,18 +10,18 @@ class GlideWrapper(private val context: Context, private val imageView: ImageVie
     fun addGif(uri: String?) {
         Glide.with(context)
             .asGif()
-            .load(uri)
             .placeholder(R.drawable.ic_time)
             .error(R.drawable.ic_error)
+            .load(uri)
             .into(imageView)
     }
 
     fun addBitmap(uri: String?) {
         Glide.with(context)
             .asBitmap()
+            .load(uri)
             .placeholder(R.drawable.ic_time)
             .error(R.drawable.ic_error)
-            .load(uri)
             .into(imageView)
     }
 
