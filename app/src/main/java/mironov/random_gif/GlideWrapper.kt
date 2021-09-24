@@ -3,12 +3,22 @@ package mironov.random_gif
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import mironov.random_gif.R
 
 
-class GlideWrapper(private val context: Context, private val imageView: ImageView) {
+class GlideWrapper {
+
+    private lateinit var context: Context
+    private lateinit var imageView: ImageView
+
+    fun setContAndView(context: Context, imageView: ImageView)  {
+        this.context = context
+        this.imageView = imageView
+
+    }
+
+
     fun addGif(uri: String?) {
-        Glide.with(context)
+        GlideApp.with(context)
             .asGif()
             .placeholder(R.drawable.ic_time)
             .error(R.drawable.ic_error)
@@ -16,8 +26,9 @@ class GlideWrapper(private val context: Context, private val imageView: ImageVie
             .into(imageView)
     }
 
+
     fun addBitmap(uri: String?) {
-        Glide.with(context)
+        GlideApp.with(context)
             .asBitmap()
             .load(uri)
             .placeholder(R.drawable.ic_time)
@@ -27,6 +38,14 @@ class GlideWrapper(private val context: Context, private val imageView: ImageVie
 
     fun clear()
     {
-        Glide.get(context).clearMemory()
+        GlideApp.with(context)
+            .asBitmap()
+            .load(R.drawable.ic_baseline_cleared_cache)
+            .placeholder(R.drawable.ic_time)
+            .error(R.drawable.ic_error)
+            .into(imageView)
+        Thread {
+            GlideApp.get(context).clearDiskCache()
+        }.start()
     }
 }

@@ -81,7 +81,7 @@ public class MainActivityViewModel : ViewModel() {
         repository.clear();
         position=-1
         positionMax=position
-        mutableStatus.postValue(Status.DATAFIRST)
+        mutableStatus.postValue(Status.CLEARCAHCE)
     }
 
     fun saveToPrefs() {

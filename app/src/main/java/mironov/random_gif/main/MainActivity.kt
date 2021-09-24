@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         setButtonListeners()
 
         //Init Glide. Glide code is moved to wrapper
-        glide = GlideWrapper(imageView.context, imageView)
+        glide = GlideWrapper()
+        glide.setContAndView(imageView.context, imageView)
 
         //Lock prev button on create
 
@@ -52,9 +53,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setButtonListeners() {
-        buttonNext.setOnClickListener { v: View? -> viewModel.getNext() }
-        buttonPrev.setOnClickListener { v: View? -> viewModel.getPrev() }
-        buttonClear.setOnClickListener { v: View? ->
+        buttonNext.setOnClickListener { viewModel.getNext() }
+        buttonPrev.setOnClickListener {  viewModel.getPrev() }
+        buttonClear.setOnClickListener{
             viewModel.clear()
             glide.clear()
         }
@@ -95,6 +96,12 @@ class MainActivity : AppCompatActivity() {
                     textView.text = getString(R.string.error_message)
                     //Show error placeholder
                     glide.addGif("")
+                }
+                Status.CLEARCAHCE -> {
+                    textView.text = baseContext.getString(R.string.cleared_cache)
+                    //Lock prev button
+                    buttonPrev.isEnabled = false
+                    buttonPrev.background = baseContext.getDrawable(R.drawable.button_background_inactive)
                 }
             }
         }
