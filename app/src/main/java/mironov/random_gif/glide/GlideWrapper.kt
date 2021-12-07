@@ -2,7 +2,6 @@ package mironov.random_gif.glide
 
 import android.content.Context
 import android.widget.ImageView
-import mironov.random_gif.GlideApp
 import mironov.random_gif.R
 
 
