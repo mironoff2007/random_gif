@@ -1,11 +1,10 @@
-package mironov.random_gif
+package mironov.random_gif.repository
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import mironov.random_gif.model.GifObject
 
 class SharedRepository {
 

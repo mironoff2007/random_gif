@@ -1,15 +1,17 @@
-package mironov.random_gif.main
+package mironov.random_gif.ui
 
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import mironov.random_gif.*
+import mironov.random_gif.glide.GlideWrapper
+import mironov.random_gif.model.GifObject
+import mironov.random_gif.model.MainActivityViewModel
+import mironov.random_gif.model.Status
 
 
 class MainActivity : AppCompatActivity() {

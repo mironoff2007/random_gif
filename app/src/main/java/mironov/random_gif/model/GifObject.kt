@@ -1,4 +1,4 @@
-package mironov.random_gif
+package mironov.random_gif.model
 
 import com.google.gson.annotations.SerializedName;
 

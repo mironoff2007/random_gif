@@ -1,7 +1,9 @@
-package mironov.random_gif;
+package mironov.random_gif.repository;
 
 
 import android.content.Context
+import mironov.random_gif.model.GifObject
+import mironov.random_gif.web.NetworkService
 import retrofit2.Call
 import java.util.*
 

@@ -1,4 +1,4 @@
-package mironov.random_gif
+package mironov.random_gif.web
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

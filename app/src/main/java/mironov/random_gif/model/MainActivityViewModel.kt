@@ -1,11 +1,9 @@
-package mironov.random_gif.main
+package mironov.random_gif.model
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import mironov.random_gif.GifObject
-import mironov.random_gif.Repository
-import mironov.random_gif.Status
+import mironov.random_gif.repository.Repository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
