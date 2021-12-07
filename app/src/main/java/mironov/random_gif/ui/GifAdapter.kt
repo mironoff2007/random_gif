@@ -7,6 +7,12 @@ import mironov.random_gif.databinding.ItemGifBinding
 
 class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClickListener {
 
+    var gifs: List<String> = emptyList()
+        set(newValue) {
+            field = newValue
+            notifyDataSetChanged()
+        }
+
     class GifViewHolder(
         val binding: ItemGifBinding
     ) : RecyclerView.ViewHolder(binding.root)
@@ -19,9 +25,7 @@ class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClic
         TODO("Not yet implemented")
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = gifs.size
 
     override fun onClick(v: View?) {
         TODO("Not yet implemented")
