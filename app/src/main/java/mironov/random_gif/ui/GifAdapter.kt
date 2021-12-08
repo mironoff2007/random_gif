@@ -3,15 +3,17 @@ package mironov.random_gif.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import mironov.random_gif.databinding.ItemGifBinding
 import mironov.random_gif.glide.GlideWrapper
 import mironov.random_gif.model.GifObject
 import java.util.ArrayList
 
-class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClickListener {
+class GifAdapter(val mainActivity: MainActivity) : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClickListener {
 
     lateinit var glide: GlideWrapper
+
 
     var gifs: ArrayList<GifObject> = ArrayList()
         set(newValue) {
@@ -28,6 +30,7 @@ class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClic
         val binding = ItemGifBinding.inflate(inflater, parent, false)
 
         binding.root.setOnClickListener(this)
+
 
         return GifViewHolder(binding)
     }
