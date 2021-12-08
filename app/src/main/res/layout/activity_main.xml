@@ -7,71 +7,67 @@
     tools:context=".ui.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="TextView"
-        android:textFontWeight="1" />
+        android:layout_weight="3"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_weight="1">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="TextView"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
 
-
-        <Button
-            android:id="@+id/buttonPrev"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_background"
-            android:drawableStart="@drawable/ic_button_back"
-            android:text="@string/button_prev_text"
-            android:textColor="@color/colorButtonText"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"/>
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+            <Button
+                android:id="@+id/buttonPrev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:drawableStart="@drawable/ic_button_back"
+                android:text="@string/button_prev_text"
+                android:textColor="@color/colorButtonText"
+                android:layout_gravity="bottom|center"
+                />
 
-        <Button
-            android:id="@+id/buttonNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background"
-            android:drawableEnd="@drawable/ic_button_forward"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="@string/button_next_text"
-            android:textColor="@color/colorButtonText" />
-        <Button
-            android:id="@+id/buttonClear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background"
-            android:text="@string/button_clear"
-            android:textColor="@color/colorButtonText"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_gravity="bottom|center"/>
+            <Button
+                android:id="@+id/buttonNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:drawableEnd="@drawable/ic_button_forward"
+                android:layout_gravity="bottom|center"
+                android:text="@string/button_next_text"
+                android:textColor="@color/colorButtonText"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/buttonClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="@string/button_clear"
+                android:textColor="@color/colorButtonText"
+
+                android:layout_gravity="bottom|center"/>
+        </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>

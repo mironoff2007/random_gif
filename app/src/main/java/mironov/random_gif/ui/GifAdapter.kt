@@ -5,10 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import mironov.random_gif.databinding.ItemGifBinding
+import mironov.random_gif.glide.GlideWrapper
 import mironov.random_gif.model.GifObject
 import java.util.ArrayList
 
 class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClickListener {
+
+    lateinit var glide: GlideWrapper
 
     var gifs: ArrayList<GifObject> = ArrayList()
         set(newValue) {
@@ -36,31 +39,26 @@ class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClic
             gifTextView.tag = gif
             gifTextView.text = gif.getDesription()
 
-            if (true) { //.isNotBlank()
-                /*
-                Glide.with(photoImageView.context)
-                    .load(user.photo)
-                    .circleCrop()
-                    .placeholder(R.drawable.ic_user_avatar)
-                    .error(R.drawable.ic_user_avatar)
-                    .into(photoImageView)
-                    */
-            } else {
-                /*
-                Glide.with(photoImageView.context).clear(photoImageView)
-                photoImageView.setImageResource(R.drawable.ic_user_avatar)
-                // you can also use the following code instead of these two lines ^
-                // Glide.with(photoImageView.context)
-                //        .load(R.drawable.ic_user_avatar)
-                //        .into(photoImageView)
-                 */
-            }
+            glide.setContAndView(gifImageView.context, gifImageView)
+            checkGifAndPost(gif)
         }
     }
 
     override fun getItemCount(): Int = gifs.size
 
     override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+        //("Not yet implemented")
+    }
+
+    private fun checkGifAndPost(obj: GifObject) {
+        //Some request does not have .gif URL(API feature)
+        //Preview picture is used instead
+        var uri: String? = obj.getUri()
+        if (uri == null) {
+            uri = obj.getPreviewUri()!!
+            glide.addBitmap(uri)
+        } else {
+            glide.addGif(uri)
+        }
     }
 }

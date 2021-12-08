@@ -38,12 +38,14 @@ class GlideWrapper {
 
     fun clear()
     {
+        /*
         GlideApp.with(context)
             .asBitmap()
             .load(R.drawable.ic_baseline_cleared_cache)
             .placeholder(R.drawable.ic_time)
             .error(R.drawable.ic_error)
             .into(imageView)
+         */
         Thread {
             GlideApp.get(context).clearDiskCache()
         }.start()
