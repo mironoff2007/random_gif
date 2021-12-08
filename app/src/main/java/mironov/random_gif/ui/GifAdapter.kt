@@ -50,6 +50,7 @@ class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClic
         //("Not yet implemented")
     }
 
+
     private fun checkGifAndPost(obj: GifObject) {
         //Some request does not have .gif URL(API feature)
         //Preview picture is used instead

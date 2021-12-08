@@ -4,11 +4,12 @@ package mironov.random_gif.ui
 import android.os.Bundle
 import android.os.Debug
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import mironov.random_gif.*
 import mironov.random_gif.databinding.ActivityMainBinding
 import mironov.random_gif.glide.GlideWrapper
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Debug.waitForDebugger()
+       // Debug.waitForDebugger()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -67,6 +68,16 @@ class MainActivity : AppCompatActivity() {
         buttonClear.setOnClickListener{
             viewModel.clear()
         }
+
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)) {
+
+                    Toast.makeText(recyclerView.context, "Last", Toast.LENGTH_LONG).show()
+                }
+            }
+        })
     }
 
     private fun initViews() {
@@ -93,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.mutableStatus.observe(this) { status ->
             when (status) {
                 Status.DATAFIRST -> {
-                    textView.text =""
+                    textView.text = ""
                     //Lock prev button
                     buttonPrev.isEnabled = false
                     buttonPrev.background =
@@ -102,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                     populateRecycler()
                 }
                 Status.DATA -> {
-                    textView.text =""
+                    textView.text = ""
                     //Unlock prev button
                     buttonPrev.isEnabled = true
                     buttonPrev.background = baseContext.getDrawable(R.drawable.button_background)
@@ -119,7 +130,8 @@ class MainActivity : AppCompatActivity() {
                     textView.text = baseContext.getString(R.string.cleared_cache)
                     //Lock prev button
                     buttonPrev.isEnabled = false
-                    buttonPrev.background = baseContext.getDrawable(R.drawable.button_background_inactive)
+                    buttonPrev.background =
+                        baseContext.getDrawable(R.drawable.button_background_inactive)
                     glide.clear()
                 }
             }
