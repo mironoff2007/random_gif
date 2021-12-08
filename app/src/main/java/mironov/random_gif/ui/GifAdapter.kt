@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import mironov.random_gif.databinding.ItemGifBinding
+import mironov.random_gif.model.GifObject
+import java.util.ArrayList
 
 class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClickListener {
 
-    var gifs: List<String> = emptyList()
+    var gifs: ArrayList<GifObject> = ArrayList()
         set(newValue) {
             field = newValue
             notifyDataSetChanged()
@@ -32,7 +34,7 @@ class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClic
         with(holder.binding) {
             holder.itemView.tag = gif
             gifTextView.tag = gif
-            gifTextView.text = gif
+            gifTextView.text = gif.getDesription()
 
             if (true) { //.isNotBlank()
                 /*

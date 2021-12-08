@@ -10,7 +10,6 @@ import java.util.*
 
 class Repository {
     private var sharedRepository: SharedRepository
-
     private var cachedGifObjects: ArrayList<GifObject>
 
     constructor(context: Context) {
@@ -18,6 +17,9 @@ class Repository {
         cachedGifObjects = sharedRepository.getList()
     }
 
+    fun getGifsListFromCache():ArrayList<GifObject>{
+        return cachedGifObjects
+    }
 
     fun addObject(obj: GifObject) {
         cachedGifObjects.add(obj)

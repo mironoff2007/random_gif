@@ -7,6 +7,7 @@ import mironov.random_gif.repository.Repository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.ArrayList
 
 
 public class MainActivityViewModel : ViewModel() {
@@ -73,6 +74,10 @@ public class MainActivityViewModel : ViewModel() {
 
     fun getGifObject(): GifObject? {
         return gifObject;
+    }
+
+    fun getGifsListFromCache(): ArrayList<GifObject> {
+       return repository.getGifsListFromCache()
     }
 
     fun clear() {
