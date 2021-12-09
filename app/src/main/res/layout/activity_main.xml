@@ -6,6 +6,12 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentContainer">
+    </androidx.fragment.app.FragmentContainerView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
