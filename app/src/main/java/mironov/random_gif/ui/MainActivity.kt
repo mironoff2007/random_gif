@@ -1,10 +1,14 @@
 package mironov.random_gif.ui
 
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +24,8 @@ import mironov.random_gif.model.Status
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainActivityViewModel
-    private lateinit var textView: TextView
+
+    private lateinit var progressBar: ProgressBar
 
     private var glide: GlideWrapper = GlideWrapper()
 
@@ -43,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         setupObserver()
         setListeners()
 
-        //Get first gif
-        viewModel.getNext()
+        //Get gifs from cache
+        populateRecycler()
     }
 
     override fun onPause() {
@@ -80,14 +85,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        textView= binding.textView
-
         adapter= GifAdapter(this)
         adapter.glide=glide
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
+
+        binding.progressBar.visibility= View.INVISIBLE
     }
 
     private fun populateRecycler() {
@@ -98,22 +103,24 @@ class MainActivity : AppCompatActivity() {
         viewModel.mutableStatus.observe(this) { status ->
             when (status) {
                 Status.DATA -> {
-                    textView.text = ""
+                    binding.progressBar.visibility= View.INVISIBLE
+
                     populateRecycler()
                 }
                 Status.LOADING -> {
-                    textView.text = getString(R.string.loading)
+                    binding.progressBar.visibility= View.VISIBLE
+
                 }
                 Status.ERROR -> {
-                    textView.text = getString(R.string.error_message)
+                    binding.progressBar.visibility= View.INVISIBLE
+                   Toast.makeText(applicationContext,getString(R.string.error_message), Toast.LENGTH_LONG).show()
                 }
                 Status.CLEARCAHCE -> {
-                    textView.text = baseContext.getString(R.string.cleared_cache)
+                    binding.progressBar.visibility= View.INVISIBLE
+                    //binding.textView.text = baseContext.getString(R.string.cleared_cache)
                     glide.clear()
                 }
             }
         }
     }
-
-
 }
