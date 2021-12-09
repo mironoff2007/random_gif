@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: GifAdapter
     private lateinit var binding: ActivityMainBinding
 
-    lateinit var errorToast:Toast
+    var errorToast:Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.progressBar.visibility= View.INVISIBLE
 
-        errorToast=Toast.makeText(this,getString(R.string.error_message), Toast.LENGTH_LONG)
     }
 
     private fun populateRecycler() {
