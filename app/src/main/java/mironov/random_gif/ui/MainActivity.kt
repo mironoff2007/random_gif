@@ -55,9 +55,11 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         viewModel.saveToPrefs()
+        errorToast?.cancel()
+        errorToast=null
     }
 
-    
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -124,9 +126,9 @@ class MainActivity : AppCompatActivity() {
                 Status.ERROR -> {
                     binding.progressBar.visibility= View.INVISIBLE
 
-                    //errorToast?.cancel()
-                    Toast.makeText(this,getString(R.string.error_message), Toast.LENGTH_LONG)
-                    //errorToast?.show()
+                    errorToast?.cancel()
+                    errorToast=Toast.makeText(this,getString(R.string.error_message), Toast.LENGTH_LONG)
+                    errorToast?.show()
 
                 }
                 Status.CLEARCAHCE -> {
