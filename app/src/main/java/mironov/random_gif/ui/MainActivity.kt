@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var textView: TextView
 
-    private var gifObject: GifObject? = null
     private var glide: GlideWrapper = GlideWrapper()
 
     private lateinit var adapter: GifAdapter
@@ -37,9 +36,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         viewModel.initRepository(this.applicationContext)
+
         initViews()
         setupObserver()
         setListeners()
@@ -70,8 +69,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-
-
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -83,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        textView= findViewById(R.id.textView)
+        textView= binding.textView
 
         adapter= GifAdapter(this)
         adapter.glide=glide
@@ -91,25 +88,17 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
-
     }
 
     private fun populateRecycler() {
         adapter.gifs= viewModel.getGifsListFromCache()
     }
 
-
     private fun setupObserver() {
         viewModel.mutableStatus.observe(this) { status ->
             when (status) {
-                Status.DATAFIRST -> {
-                    textView.text = ""
-
-                    populateRecycler()
-                }
                 Status.DATA -> {
                     textView.text = ""
-
                     populateRecycler()
                 }
                 Status.LOADING -> {
@@ -120,7 +109,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 Status.CLEARCAHCE -> {
                     textView.text = baseContext.getString(R.string.cleared_cache)
-
                     glide.clear()
                 }
             }
