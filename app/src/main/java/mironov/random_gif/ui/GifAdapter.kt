@@ -10,7 +10,7 @@ import mironov.random_gif.glide.GlideWrapper
 import mironov.random_gif.model.GifObject
 import java.util.ArrayList
 
-class GifAdapter(val mainActivity: MainActivity) : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClickListener {
+class GifAdapter() : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClickListener {
 
     lateinit var glide: GlideWrapper
 
