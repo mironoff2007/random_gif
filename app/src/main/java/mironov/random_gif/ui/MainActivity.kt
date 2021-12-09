@@ -123,7 +123,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 Status.ERROR -> {
                     binding.progressBar.visibility= View.INVISIBLE
-                   Toast.makeText(applicationContext,getString(R.string.error_message), Toast.LENGTH_LONG).show()
+
+                    //errorToast?.cancel()
+                    Toast.makeText(this,getString(R.string.error_message), Toast.LENGTH_LONG)
+                    //errorToast?.show()
+
                 }
                 Status.CLEARCAHCE -> {
                     binding.progressBar.visibility= View.INVISIBLE
