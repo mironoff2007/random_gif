@@ -46,5 +46,6 @@ class Repository {
     fun clear() {
         sharedRepository.clearPrefs()
         cachedGifObjects.clear()
+        cachedGifObjects=ArrayList<GifObject>()
     }
 }

@@ -117,7 +117,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 Status.CLEARCAHCE -> {
                     binding.progressBar.visibility= View.INVISIBLE
-                    //binding.textView.text = baseContext.getString(R.string.cleared_cache)
+                    //Toast.makeText(applicationContext,getString(R.string.cleared_cache), Toast.LENGTH_LONG).show()
+                    populateRecycler()
                     glide.clear()
                 }
             }
