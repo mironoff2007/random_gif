@@ -2,9 +2,9 @@ package mironov.random_gif.ui
 
 
 import android.os.Bundle
-import android.widget.Button
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var textView: TextView
-    private lateinit var buttonClear: Button
-
 
     private var gifObject: GifObject? = null
     private var glide: GlideWrapper = GlideWrapper()
@@ -44,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.initRepository(this.applicationContext)
         initViews()
         setupObserver()
-        setButtonListeners()
+        setListeners()
 
         //Get first gif
         viewModel.getNext()
@@ -55,11 +53,24 @@ class MainActivity : AppCompatActivity() {
         viewModel.saveToPrefs()
     }
 
-    private fun setButtonListeners() {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
 
-        buttonClear.setOnClickListener{
-            viewModel.clear()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_clear -> {
+                viewModel.clear()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun setListeners() {
+
 
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -73,7 +84,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         textView= findViewById(R.id.textView)
-        buttonClear = findViewById(R.id.buttonClear)
 
         adapter= GifAdapter(this)
         adapter.glide=glide
