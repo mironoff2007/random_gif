@@ -43,12 +43,7 @@ public class MainActivityViewModel : ViewModel() {
                             position++;
                             positionMax = position;
                         }
-                        if (position > 0) {
                             mutableStatus.postValue(Status.DATA);
-                        } else {
-                            mutableStatus.postValue(Status.DATAFIRST);
-                        }
-
                     }
 
                     override fun onFailure(call: Call<GifObject?>, t: Throwable) {
@@ -77,7 +72,7 @@ public class MainActivityViewModel : ViewModel() {
     }
 
     fun getGifsListFromCache(): ArrayList<GifObject> {
-       return repository.getGifsListFromCache()
+        return repository.getGifsListFromCache()
     }
 
     fun clear() {

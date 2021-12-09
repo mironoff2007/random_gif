@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 import mironov.random_gif.*
 import mironov.random_gif.databinding.ActivityMainBinding
 import mironov.random_gif.glide.GlideWrapper
