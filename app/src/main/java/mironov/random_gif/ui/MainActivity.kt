@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import mironov.random_gif.*
 import mironov.random_gif.databinding.ActivityMainBinding
 import mironov.random_gif.glide.GlideWrapper
-import mironov.random_gif.model.GifObject
 import mironov.random_gif.model.MainActivityViewModel
 import mironov.random_gif.model.Status
 
@@ -26,12 +25,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainActivityViewModel
 
-    private lateinit var progressBar: ProgressBar
-
     private var glide: GlideWrapper = GlideWrapper()
 
     private lateinit var adapter: GifAdapter
     private lateinit var binding: ActivityMainBinding
+
+    lateinit var errorToast:Toast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +56,8 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         viewModel.saveToPrefs()
     }
+
+    
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -94,10 +95,19 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
 
         binding.progressBar.visibility= View.INVISIBLE
+
+        errorToast=Toast.makeText(this,getString(R.string.error_message), Toast.LENGTH_LONG)
     }
 
     private fun populateRecycler() {
         adapter.gifs= viewModel.getGifsListFromCache()
+        //show hint to populate recycler by drag
+        if(adapter.gifs.isEmpty()){
+            binding.hint.visibility=View.VISIBLE
+        }
+        else{
+            binding.hint.visibility=View.INVISIBLE
+        }
     }
 
     private fun setupObserver() {
