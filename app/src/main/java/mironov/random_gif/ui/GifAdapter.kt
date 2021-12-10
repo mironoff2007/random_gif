@@ -10,10 +10,7 @@ import mironov.random_gif.glide.GlideWrapper
 import mironov.random_gif.model.GifObject
 import java.util.ArrayList
 
-class GifAdapter() : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClickListener {
-
-    lateinit var glide: GlideWrapper
-
+class GifAdapter(val listener: ItemClickListener<GifObject>) : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnClickListener {
 
     var gifs: ArrayList<GifObject> = ArrayList()
         set(newValue) {
@@ -42,9 +39,12 @@ class GifAdapter() : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnCl
             gifTextView.tag = gif
             gifTextView.text = gif.getDesription()
 
-            glide.setContAndView(gifImageView.context, gifImageView)
-            checkGifAndPost(gif)
+            GlideWrapper(gifImageView.context).checkGifAndPost(gif, gifImageView)
         }
+
+        val itemBinding = holder.binding
+        itemBinding.root.setOnClickListener { listener.onClickListener(gif) }
+
     }
 
     override fun getItemCount(): Int = gifs.size
@@ -53,16 +53,4 @@ class GifAdapter() : RecyclerView.Adapter<GifAdapter.GifViewHolder>(), View.OnCl
         //("Not yet implemented")
     }
 
-
-    private fun checkGifAndPost(obj: GifObject) {
-        //Some request does not have .gif URL(API feature)
-        //Preview picture is used instead
-        var uri: String? = obj.getUri()
-        if (uri == null) {
-            uri = obj.getPreviewUri()!!
-            glide.addBitmap(uri)
-        } else {
-            glide.addGif(uri)
-        }
-    }
 }

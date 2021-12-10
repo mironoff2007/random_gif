@@ -10,7 +10,7 @@ import retrofit2.Response
 import java.util.ArrayList
 
 
-public class MainActivityViewModel : ViewModel() {
+public class FragmentGifListViewModel : ViewModel() {
 
     var position = -1
     var positionMax = -1

@@ -3,21 +3,25 @@ package mironov.random_gif.glide
 import android.content.Context
 import android.widget.ImageView
 import mironov.random_gif.R
+import mironov.random_gif.model.GifObject
 
 
-class GlideWrapper {
+class GlideWrapper(val context: Context ) {
 
-    private lateinit var context: Context
-    private lateinit var imageView: ImageView
 
-    fun setContAndView(context: Context, imageView: ImageView)  {
-        this.context = context
-        this.imageView = imageView
-
+    fun checkGifAndPost(obj: GifObject,imageView: ImageView) {
+        //Some request does not have .gif URL(API feature)
+        //Preview picture is used instead
+        var uri: String? = obj.getUri()
+        if (uri == null) {
+            uri = obj.getPreviewUri()!!
+            addBitmap(uri,imageView)
+        } else {
+            addGif(uri,imageView)
+        }
     }
 
-
-    fun addGif(uri: String?) {
+    private fun addGif(uri: String?,imageView: ImageView) {
         GlideApp.with(context)
             .asGif()
             .placeholder(R.drawable.ic_time)
@@ -27,7 +31,7 @@ class GlideWrapper {
     }
 
 
-    fun addBitmap(uri: String?) {
+    private fun addBitmap(uri: String?,imageView: ImageView) {
         GlideApp.with(context)
             .asBitmap()
             .load(uri)

@@ -8,19 +8,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import mironov.random_gif.databinding.FragmentGifListBinding
 import mironov.random_gif.glide.GlideWrapper
-import mironov.random_gif.model.MainActivityViewModel
+import mironov.random_gif.model.FragmentGifListViewModel
 import android.view.MenuInflater
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import mironov.random_gif.contract.navigator
+import mironov.random_gif.model.GifObject
 import mironov.random_gif.model.Status
 
 
 class GifListFragment : Fragment() {
 
-    private lateinit var viewModel: MainActivityViewModel
-
-    private var glide: GlideWrapper = GlideWrapper()
+    private lateinit var viewModel: FragmentGifListViewModel
 
     private lateinit var adapter: GifAdapter
     private lateinit var binding: FragmentGifListBinding
@@ -55,7 +55,7 @@ class GifListFragment : Fragment() {
     ): View? {
         binding = FragmentGifListBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(FragmentGifListViewModel::class.java)
         viewModel.initRepository(this.requireContext())
 
         initViews()
@@ -75,6 +75,10 @@ class GifListFragment : Fragment() {
         errorToast = null
     }
 
+    fun showGifInfo(gif:GifObject){
+        navigator().showGifInfoScreen(gif)
+    }
+
     private fun setListeners() {
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -84,11 +88,17 @@ class GifListFragment : Fragment() {
                 }
             }
         })
+
     }
 
+
     private fun initViews() {
-        adapter = GifAdapter()
-        adapter.glide = glide
+
+        adapter = GifAdapter(object :ItemClickListener<GifObject> {
+            override fun onClickListener(item: GifObject) {
+                showGifInfo(item)
+            }
+        })
 
         val layoutManager = LinearLayoutManager(this.requireContext())
         binding.recyclerView.layoutManager = layoutManager
@@ -142,7 +152,7 @@ class GifListFragment : Fragment() {
                     binding.progressBar.visibility = View.INVISIBLE
                     //Toast.makeText(applicationContext,getString(R.string.cleared_cache), Toast.LENGTH_LONG).show()
                     populateRecycler()
-                    glide.clear()
+                    GlideWrapper(requireContext()).clear()
                 }
             }
         }
