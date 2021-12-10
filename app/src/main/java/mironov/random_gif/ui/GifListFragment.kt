@@ -11,6 +11,7 @@ import mironov.random_gif.databinding.FragmentGifListBinding
 import mironov.random_gif.glide.GlideWrapper
 import mironov.random_gif.model.MainActivityViewModel
 import android.view.MenuInflater
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mironov.random_gif.model.Status
@@ -93,6 +94,7 @@ class GifListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(this.requireContext())
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(binding.recyclerView.context, DividerItemDecoration.VERTICAL));
 
         binding.progressBar.visibility = View.INVISIBLE
 
@@ -118,7 +120,7 @@ class GifListFragment : Fragment() {
                 }
                 Status.LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
-
+                    binding.hint.visibility = View.INVISIBLE
                 }
                 Status.ERROR -> {
                     binding.progressBar.visibility = View.INVISIBLE
@@ -131,6 +133,11 @@ class GifListFragment : Fragment() {
                     )
                     errorToast?.show()
 
+                    if (adapter.gifs.isEmpty()) {
+                        binding.hint.visibility = View.VISIBLE
+                    } else {
+                        binding.hint.visibility = View.INVISIBLE
+                    }
                 }
                 Status.CLEARCAHCE -> {
                     binding.progressBar.visibility = View.INVISIBLE
