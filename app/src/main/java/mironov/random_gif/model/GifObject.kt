@@ -1,8 +1,11 @@
 package mironov.random_gif.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName;
+import kotlinx.android.parcel.Parcelize
 
-class GifObject {
+@Parcelize
+class GifObject: Parcelable {
     @SerializedName("description")
     private var desription: String? = null
 
@@ -44,4 +47,5 @@ class GifObject {
                 ", previewUri='" + previewUri + '\'' +
                 '}'
     }
+
 }

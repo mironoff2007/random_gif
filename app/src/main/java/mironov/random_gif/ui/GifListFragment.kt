@@ -1,12 +1,11 @@
 package mironov.random_gif.ui
 
-import android.R
+
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import mironov.random_gif.databinding.ActivityMainBinding
 import mironov.random_gif.databinding.FragmentGifListBinding
 import mironov.random_gif.glide.GlideWrapper
 import mironov.random_gif.model.MainActivityViewModel
