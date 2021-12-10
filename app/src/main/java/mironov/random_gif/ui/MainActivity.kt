@@ -22,10 +22,11 @@ class MainActivity : AppCompatActivity(), Navigator {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (savedInstanceState == null) {
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragmentContainer, GifListFragment())
-            .commit()
+            .commit()}
 
             //Debug.waitForDebugger()
     }
