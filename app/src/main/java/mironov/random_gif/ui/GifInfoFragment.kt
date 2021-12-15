@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import mironov.random_gif.databinding.FragmentGifInfoBinding
 import mironov.random_gif.glide.GlideWrapper
@@ -44,5 +45,7 @@ class GifInfoFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+
+        fun createArgs(gif: GifObject) = bundleOf(GIF_OBJECT to gif)
     }
 }
